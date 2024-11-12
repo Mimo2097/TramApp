@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 const Map= ({navigation}) => {

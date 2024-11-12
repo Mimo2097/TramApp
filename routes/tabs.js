@@ -2,36 +2,39 @@ import React from 'react';
 
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import FontistoIcon from 'react-native-vector-icons/Fontisto';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+
 
 import Favourites from '../screens/favourites';
 import Map from '../screens/map';
 import Settings from '../screens/settings';
 import Search from '../screens/search';
-import FindScreen from '../screens/FindScreen';
+
 
 
 
 const Tab = createBottomTabNavigator();
 
-const CustomTabBarButton = ({children, onPress}) => (
-    <TouchableOpacity
-    style={{
-        top: -30,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }}
-    onPress={onPress}>
-        <View style={{
-            width: 70,
-            height: 70,
-            borderRadius: 35,
-            backgroundColor: '#e32f45'
+// const CustomTabBarButton = ({children, onPress}) => (
+//     <TouchableOpacity
+//     style={{
+//         top: -30,
+//         justifyContent: 'center',
+//         alignItems: 'center'
+//     }}
+//     onPress={onPress}>
+//         <View style={{
+//             width: 70,
+//             height: 70,
+//             borderRadius: 35,
+//             backgroundColor: '#e32f45'
 
-        }}>
-            {children}
-        </View>
-    </TouchableOpacity>
-)
+//         }}>
+//             {children}
+//         </View>
+//     </TouchableOpacity>
+// )
 
 const Tabs = () => {
     return (
@@ -54,6 +57,7 @@ const Tabs = () => {
             <Tab.Screen  name="Favourites" component={Favourites} options={{
                 tabBarIcon: ({focused}) => ( //focused um nur das Bild anzuzeigen
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                        <FontistoIcon name="map" size={20} color="#000" />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
                             
                         </Text>
@@ -65,16 +69,7 @@ const Tabs = () => {
             <Tab.Screen  name="Map" component={Map} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
-                            
-                        </Text>
-                    </View>
-                ),
-            }}
-            />
-            <Tab.Screen  name="Settings" component={Settings} options={{
-                tabBarIcon: ({focused}) => (
-                    <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                        <FontistoIcon name="map" size={20} color="#000" />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
                             
                         </Text>
@@ -86,6 +81,7 @@ const Tabs = () => {
             <Tab.Screen  name="Search" component={Search} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                        <FontistoIcon name="search" size={20} color="#000" />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
                             
                         </Text>
@@ -93,6 +89,20 @@ const Tabs = () => {
                 ),
             }}
             />
+
+            <Tab.Screen  name="Settings" component={Settings} options={{
+                tabBarIcon: ({focused}) => (
+                    <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                        <FeatherIcon name="settings" size={20} color="#000" />
+                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
+                            
+                        </Text>
+                    </View>
+                ),
+            }}
+            />
+
+
     </Tab.Navigator>
     );
 }
