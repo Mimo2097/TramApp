@@ -1,6 +1,6 @@
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
-import Favourites from '../screens/favourites';
+import Favorites from '../screens/favorites';
 import Settings from '../screens/settings';
 import Map from '../screens/map';
 

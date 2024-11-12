@@ -4,9 +4,9 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
-import Favourites from '../screens/favourites';
+import Favorites from '../screens/favorites';
 import Map from '../screens/map';
 import Settings from '../screens/settings';
 import Search from '../screens/search';
@@ -54,10 +54,10 @@ const Tabs = () => {
           }
         }}
         >
-            <Tab.Screen  name="Favourites" component={Favourites} options={{
+            <Tab.Screen  name="Favorites" component={Favorites} options={{
                 tabBarIcon: ({focused}) => ( //focused um nur das Bild anzuzeigen
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                        <FontistoIcon name="map" size={20} color="#000" />
+                        <Ionicons name="bookmark-outline" size={20} color="#000" />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
                             
                         </Text>

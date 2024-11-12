@@ -2,16 +2,16 @@ import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 
 
-const Favourites= ({navigation}) => {
+const Favorites= ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text>Favourites Screen</Text>
+      <Text>Favorites Screen</Text>
       <Button title='Click Here!' alert={'Button Clicked!'}/>
     </View>
   );
 };
 
-export default Favourites;
+export default Favorites;
 
 const styles = StyleSheet.create({
   container: { 

@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
 
-import Favourites from './screens/favourites';
+import Favorites from './screens/favorites';
 import Settings from './screens/settings';
 import Map from './screens/map';
 import Tabs from './routes/tabs';
