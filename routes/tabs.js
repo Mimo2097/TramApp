@@ -10,12 +10,10 @@ import Favorites from '../screens/favorites';
 import Map from '../screens/map';
 import Settings from '../screens/settings';
 import Search from '../screens/search';
-
-
+import SearchNoApi from '../screens/search_no_api';
 
 
 const Tab = createBottomTabNavigator();
-
 // const CustomTabBarButton = ({children, onPress}) => (
 //     <TouchableOpacity
 //     style={{
@@ -57,9 +55,9 @@ const Tabs = () => {
             <Tab.Screen  name="Favorites" component={Favorites} options={{
                 tabBarIcon: ({focused}) => ( //focused um nur das Bild anzuzeigen
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                        <Ionicons name="bookmark-outline" size={20} color="#000" />
-                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
-                            
+                        <Ionicons name="bookmark" size={20} color="#000" />
+                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+
                         </Text>
                     </View>
                 ),
@@ -78,7 +76,7 @@ const Tabs = () => {
             }}
             />
 
-            <Tab.Screen  name="Search" component={Search} options={{
+            <Tab.Screen  name="SearchNoApi" component={SearchNoApi} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                         <FontistoIcon name="search" size={20} color="#000" />
@@ -89,7 +87,7 @@ const Tabs = () => {
                 ),
             }}
             />
-
+  
             <Tab.Screen  name="Settings" component={Settings} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
