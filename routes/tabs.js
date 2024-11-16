@@ -5,34 +5,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import Favorites from '../screens/favorites';
 import Map from '../screens/map';
 import Settings from '../screens/settings';
-import Search from '../screens/search';
-import SearchNoApi from '../screens/search_no_api';
+import SearchNoApi from '../screens/SearchNoApi';
+import SearchStack from './SearchStack';
+
 
 
 const Tab = createBottomTabNavigator();
-// const CustomTabBarButton = ({children, onPress}) => (
-//     <TouchableOpacity
-//     style={{
-//         top: -30,
-//         justifyContent: 'center',
-//         alignItems: 'center'
-//     }}
-//     onPress={onPress}>
-//         <View style={{
-//             width: 70,
-//             height: 70,
-//             borderRadius: 35,
-//             backgroundColor: '#e32f45'
-
-//         }}>
-//             {children}
-//         </View>
-//     </TouchableOpacity>
-// )
 
 const Tabs = () => {
     return (
@@ -76,7 +57,7 @@ const Tabs = () => {
             }}
             />
 
-            <Tab.Screen  name="SearchNoApi" component={SearchNoApi} options={{
+            <Tab.Screen  name="Search" component={SearchStack} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                         <FontistoIcon name="search" size={20} color="#000" />
@@ -104,6 +85,7 @@ const Tabs = () => {
     </Tab.Navigator>
     );
 }
+export default Tabs;
 
 const styles = StyleSheet.create({
     shadow: {
@@ -112,6 +94,6 @@ const styles = StyleSheet.create({
         elevation: 5,
     }
 })
-export default Tabs;
+
 
 

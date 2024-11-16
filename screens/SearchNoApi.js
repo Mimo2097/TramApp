@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, FlatList, Button, TouchableOpacity, Alert } from 'react-native';
 import { stations } from '../data'; // Importiere deine Stationsdaten
 
-const SearchNoApi = () => {
+
+const SearchNoApi = ({navigation}) => {
   const [search, setSearch] = useState(''); // Suchtext
   const [filteredStations, setFilteredStations] = useState(stations); // Gefilterte Stationen
   const [selectedStation, setSelectedStation] = useState(null);
@@ -29,15 +30,13 @@ const SearchNoApi = () => {
   };
 
   
-
   return (
     <View style={styles.container}>
-
       <TextInput
         style={styles.searchBar}
         placeholder="Station suchen..."
         value={search}
-        onChangeText={(text) => filterStations(text)} //Ruft die Filterfunktion auf
+        onChangeText={(text) => filterStations(text)} // Ruft die Filterfunktion auf
       />
       <FlatList
         data={filteredStations} // Gefilterte Stationen
@@ -45,27 +44,17 @@ const SearchNoApi = () => {
         renderItem={({ item }) => (
           <View style={styles.station}>
             <TouchableOpacity 
-            onPress={() => handlePressOnStation(item)}
-            style={styles.station}>
-            <Text style={styles.stationName}>{item.name}</Text>
+              onPress={() => navigation.navigate('StationDetails', {station: item})} // Navigiere zur Detailseite
+              style={styles.station}
+            >
+              <Text style={styles.stationName}>{item.name}</Text>
             </TouchableOpacity>
-            {selectedStation?.name === item.name && (
-            <FlatList
-              data={item.departures} // Abfahrten der Station
-              keyExtractor={(departure) => `${item.name}-${departure.departureTime}`} 
-              renderItem={({ item: departure }) => (
-                <Text style={styles.departure}>
-                  Linie {departure.line} Richtung {departure.endstation} um{' '}
-                  {new Date(departure.departureTime).toLocaleTimeString()}
-                </Text>
-              )}
-            />
-            )}
           </View>
         )}
       />
     </View>
   );
+  
 };
 
 export default SearchNoApi;

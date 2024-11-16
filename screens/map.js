@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
+
 const Map= ({navigation}) => {
   const [search, setSearch] = useState('');
   return (
