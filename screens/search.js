@@ -63,7 +63,6 @@ const StationListWithSearch = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Suchleiste */}
       <TextInput
         style={styles.searchBar}
         placeholder="Station suchen..."

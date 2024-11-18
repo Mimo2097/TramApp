@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import {stations} from '../data';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -9,9 +9,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Map = ({ navigation }) => {
   const [search, setSearch] = useState('');
   
-  const filteredMarkers = stations.filter((stations) =>
-    stations.name.toLowerCase().includes(search.toLowerCase())
-  );  
+  const filteredStations = stations.filter((station) =>
+    station.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <View style={styles.container}>
@@ -23,7 +23,7 @@ const Map = ({ navigation }) => {
         longitudeDelta: 0.05,
         }}
         >
-        {stations.map((station) => (
+          {filteredStations.map((station) => (
           <Marker
           key={station.id}
           coordinate={{
@@ -32,11 +32,13 @@ const Map = ({ navigation }) => {
           }}
           title={station.name}
         >
-          <Icon name="tram" size={30} color="blue" />
+          <View>
+            <Icon name="tram" size={30} color="blue" />
+          </View>
+
         </Marker>
         ))}
         
-
       </MapView>
       <TextInput
         style={styles.searchBar}
