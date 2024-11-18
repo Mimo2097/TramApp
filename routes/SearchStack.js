@@ -8,8 +8,8 @@ const Stack = createStackNavigator();
 const SearchStack = () => {
     return(
         <Stack.Navigator>
-            <Stack.Screen name='SearchNoApi' component={SearchNoApi} options={{title: 'Stationdetails'}}/>
-            <Stack.Screen name='StationDetails' component={StationDetails} options={{title: 'Station Details'}}/>
+            <Stack.Screen name='SearchNoApi' component={SearchNoApi} options={{ headerShown: false }}/>
+            <Stack.Screen name='StationDetails' component={StationDetails} options={{title: 'Details'}}/>
         </Stack.Navigator>
     );
 };

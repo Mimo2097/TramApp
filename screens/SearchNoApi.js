@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, FlatList, Button, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, TextInput, FlatList, Button, TouchableOpacity, Alert } from 'react-native';
 import { stations } from '../data'; // Importiere deine Stationsdaten
 
 
@@ -31,10 +31,10 @@ const SearchNoApi = ({navigation}) => {
 
   
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.searchBar}
-        placeholder="Station suchen..."
+        placeholder="Haltestation suchen..."
         value={search}
         onChangeText={(text) => filterStations(text)} // Ruft die Filterfunktion auf
       />
@@ -52,7 +52,7 @@ const SearchNoApi = ({navigation}) => {
           </View>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
   
 };

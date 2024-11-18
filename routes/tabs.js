@@ -17,26 +17,24 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
     return (
-        <Tab.Navigator
-        tabBarOptions={{
-          showLabel: false,
-          style:{
-            position: 'absolute',
-            bottom: 25,
-            left: 20,
-            right: 20,
-            elevation: 0,
-            backgroundColor: '#ffffff',
-            borderRadius: 15,
-            height: 90,
-            ...styles.shadow
-          }
-        }}
-        >
+            <Tab.Navigator
+    screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: {
+        position: 'absolute',
+        bottom: 0,
+        left: 20,
+        right: 20,
+        elevation: 0,
+        backgroundColor: '#F5F5F5',
+        height: 90,
+        },
+    }}
+    >
             <Tab.Screen  name="Favorites" component={Favorites} options={{
                 tabBarIcon: ({focused}) => ( //focused um nur das Bild anzuzeigen
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                        <Ionicons name="bookmark" size={20} color="#000" />
+                        <Ionicons name="bookmark" size={focused ? 24 : 20} color={focused ? '#007BFF' : '#748c94'} />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
 
                         </Text>
@@ -48,7 +46,7 @@ const Tabs = () => {
             <Tab.Screen  name="Map" component={Map} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                        <FontistoIcon name="map" size={20} color="#000" />
+                        <FontistoIcon name="map" size={focused ? 24 : 20} color={focused ? '#007BFF' : '#748c94'} />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
                             
                         </Text>
@@ -60,7 +58,7 @@ const Tabs = () => {
             <Tab.Screen  name="Search" component={SearchStack} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                        <FontistoIcon name="search" size={20} color="#000" />
+                        <FontistoIcon name="search" size={focused ? 24 : 20} color={focused ? '#007BFF' : '#748c94'} />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
                             
                         </Text>
@@ -72,7 +70,7 @@ const Tabs = () => {
             <Tab.Screen  name="Settings" component={Settings} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                        <FeatherIcon name="settings" size={20} color="#000" />
+                        <FeatherIcon name="settings" size={focused ? 24 : 20} color={focused ? '#007BFF' : '#748c94'} />
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}> 
                             
                         </Text>
@@ -80,8 +78,6 @@ const Tabs = () => {
                 ),
             }}
             />
-
-
     </Tab.Navigator>
     );
 }
@@ -89,10 +85,16 @@ export default Tabs;
 
 const styles = StyleSheet.create({
     shadow: {
-        shadowcolor: '#7F5DF0',
+        shadowColor: '#7F5DF0',
+        shadowOffset: {
+          width: 0,
+          height: 10,
+        },
+        shadowOpacity: 0.25,
         shadowRadius: 3.5,
         elevation: 5,
-    }
+      },
+      
 })
 
 

@@ -7,6 +7,14 @@ const StationDetails = ({ route }) => { // route enthält die übergebenen Param
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{station.name}</Text>
+            <View>
+                {station.departures.map((departure, index) => ( //Iteration durch jedes Element
+                    <Text key={index} style={styles.subtitle}>
+                    Linie {departure.line} Richtung {departure.endstation} um{' '}
+                    {new Date(departure.departureTime).toLocaleTimeString()}
+                    </Text>
+                ))}
+                </View>
         </View>
     );
 };

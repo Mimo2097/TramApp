@@ -47,7 +47,7 @@ const StationListWithSearch = () => {
   if (isLoading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#5500dc" />
+        <ActivityIndicator size={30} color="#5500dc" />
       </View>
     );
   }
