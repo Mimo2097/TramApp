@@ -3,6 +3,8 @@ import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import {stations} from '../data';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 const Map = ({ navigation }) => {
   const [search, setSearch] = useState('');
@@ -21,14 +23,18 @@ const Map = ({ navigation }) => {
         longitudeDelta: 0.05,
         }}
         >
-        {stations.map((stations) => (<Marker
-           key={stations.id}
-           coordinate={{
-           latitude: stations.location.latitude,
-           longitude: stations.location.longitude,
-           }}
-          title={stations.name}
-          />))}
+        {stations.map((station) => (
+          <Marker
+          key={station.id}
+          coordinate={{
+            latitude: station.location.latitude,
+            longitude: station.location.longitude,
+          }}
+          title={station.name}
+        >
+          <Icon name="tram" size={30} color="blue" />
+        </Marker>
+        ))}
         
 
       </MapView>
