@@ -15,7 +15,7 @@ import SearchStack from './SearchStack';
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {
+const Tabs = ({ favorites, addFavorite, removeFavorite }) => {
     return (
         <Tab.Navigator
         screenOptions={{
@@ -29,9 +29,11 @@ const Tabs = () => {
         backgroundColor: '#F5F5F5',
         height: 90,
         },
-    }}
-    >
-            <Tab.Screen  name="Favorites" component={Favorites} options={{
+        }}
+        >
+            <Tab.Screen  
+            name="Favorites" 
+            options={{
                 tabBarIcon: ({focused}) => ( //focused um nur das Bild anzuzeigen
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                         <Ionicons name="bookmark" size={focused ? 24 : 20} color={focused ? '#007BFF' : '#748c94'} />
@@ -41,9 +43,19 @@ const Tabs = () => {
                     </View>
                 ),
             }}
+            >
+            {() => (
+            <Favorites //Screen Favorites kritt Props favorites, addFav, removeFav als children-Prop iwwerginn 
+                favorites={favorites}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
             />
+            )}
+            </Tab.Screen>
 
-            <Tab.Screen  name="Map" component={Map} options={{
+            <Tab.Screen  
+            name="Map"
+             options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                         <FontistoIcon name="map" size={focused ? 24 : 20} color={focused ? '#007BFF' : '#748c94'} />
@@ -53,9 +65,19 @@ const Tabs = () => {
                     </View>
                 ),
             }}
+            >
+                {() => (
+            <Map 
+            favorites={favorites}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
             />
+            )}
+            </Tab.Screen>
 
-            <Tab.Screen  name="Search" component={SearchStack} options={{
+            <Tab.Screen  
+            name="Search" 
+            options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                         <FontistoIcon name="search" size={focused ? 24 : 20} color={focused ? '#007BFF' : '#748c94'} />
@@ -65,7 +87,15 @@ const Tabs = () => {
                     </View>
                 ),
             }}
+            >
+            {() => (
+            <SearchStack 
+                favorites={favorites}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
             />
+            )}
+            </Tab.Screen>
   
             <Tab.Screen  name="Settings" component={Settings} options={{
                 tabBarIcon: ({focused}) => (

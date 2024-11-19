@@ -1,19 +1,42 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
-const Favorites= ({navigation}) => {
+const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
   const [search, setSearch] = useState('');
   return (
+
     <View style={styles.container}>
-      <Text>Favorites Screen</Text>
-      <TextInput
-        style={styles.searchBar}
-        placeholder="Haltestation suchen..."
-        value={search}
-        onChangeText={(text) => setSearch(text)} // Ruft die Filterfunktion auf
-      />
-      <Button title='Click Here!' alert={'Button Clicked!'}/>
+      {favorites.length === 0? (
+        <>
+        <TouchableOpacity style={styles.addButton} onPress={addFavorite}>
+          <FontAwesome name="plus" size={30} color="gray" />
+        </TouchableOpacity>
+        <Text style={styles.emptyText}>It is empty here</Text>
+        <Text style={styles.subText}>Start adding your first station</Text>
+        </>
+      ): (
+        <>
+          <TextInput
+            style={styles.searchBar}
+            placeholder="Haltestation suchen..."
+            value={search}
+            onChangeText={(text) => setSearch(text)} // Ruft die Filterfunktion auf
+          />
+          <FlatList
+            data={favorites}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <View >
+                <Text >{item.name}</Text>
+                <Text >
+                  Latitude: {item.location.latitude}, Longitude: {item.location.longitude}
+                </Text>
+              </View>
+            )}
+          />
+          </>
+      )}
     </View>
   );
 };
@@ -42,5 +65,26 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     zIndex: 1,
-  }
+  },
+  addButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: 'gray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  emptyText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'gray',
+    marginTop: 10,
+  },
+  subText: {
+    fontSize: 14,
+    color: 'gray',
+    marginTop: 5,
+  },
 });

@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, TextInput, FlatList, Button, TouchableOpacity, Alert } from 'react-native';
-import { stations } from '../data'; // Importiere deine Stationsdaten
+import { stations } from '../data';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
-const SearchNoApi = ({navigation}) => {
-  const [search, setSearch] = useState(''); // Suchtext
-  const [filteredStations, setFilteredStations] = useState(stations); // Gefilterte Stationen
+
+const SearchNoApi = ({navigation, favorites, addFavorite, removeFavorite}) => {
+  const [search, setSearch] = useState(''); 
+  const [filteredStations, setFilteredStations] = useState(stations); // Gefiltert Statiounen
   const [selectedStation, setSelectedStation] = useState(null);
 
-  // Filterfunktion
+ 
   const filterStations = (text) => {
-    setSearch(text); // Aktualisiere den Suchtext
+    setSearch(text); 
     if (text) {
       const filtered = stations.filter((station) =>
         station.name.toLowerCase().includes(text.toLowerCase())
       );
-      setFilteredStations(filtered); // Speichere die gefilterten Stationen
+      setFilteredStations(filtered); 
     } else {
-      setFilteredStations(stations); // Zeige alle Stationen, wenn kein Suchtext eingegeben wurde
+      setFilteredStations(stations); 
     }
   };
 
@@ -29,32 +31,42 @@ const SearchNoApi = ({navigation}) => {
     }
   };
 
-  
   return (
     <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.searchBar}
         placeholder="Haltestation suchen..."
         value={search}
-        onChangeText={(text) => filterStations(text)} // Ruft die Filterfunktion auf
+        onChangeText={(text) => filterStations(text)}
       />
       <FlatList
-        data={filteredStations} // Gefilterte Stationen
-        keyExtractor={(item) => item.name} // Verwende `name` als Schlüssel
+        data={filteredStations} 
+        keyExtractor={(item) => item.name} 
         renderItem={({ item }) => (
           <View style={styles.station}>
             <TouchableOpacity 
-              onPress={() => navigation.navigate('StationDetails', {station: item})} // Navigiere zur Detailseite
+              onPress={() => navigation.navigate('StationDetails', {station: item})} 
               style={styles.station}
             >
               <Text style={styles.stationName}>{item.name}</Text>
             </TouchableOpacity>
+            {/* <TouchableOpacity 
+              onPress={() => {
+                if (!favorites.some((fav) => fav.id === item.id)) {
+                  addFavorite(item); 
+                } else {
+                  removeFavorite(item.id);
+                }
+              }}
+            >
+              <FontAwesome name={favorites.some((fav) => fav.id === item.id) ? 'star' : 'star-o'}
+              size={20} color="white" />
+            </TouchableOpacity> */}
           </View>
         )}
       />
     </SafeAreaView>
   );
-  
 };
 
 export default SearchNoApi;

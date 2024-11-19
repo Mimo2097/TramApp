@@ -38,8 +38,8 @@ const Map = ({ navigation }) => {
 
         </Marker>
         ))}
-        
       </MapView>
+      
       <TextInput
         style={styles.searchBar}
         placeholder="Hier suchen"
