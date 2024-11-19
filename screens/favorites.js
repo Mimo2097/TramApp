@@ -7,6 +7,12 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
   return (
 
     <View style={styles.container}>
+      <TextInput
+            style={styles.searchBar}
+            placeholder="Haltestation suchen..."
+            value={search}
+            onChangeText={(text) => setSearch(text)} // Ruft die Filterfunktion auf
+          />
       {favorites.length === 0? (
         <>
         <TouchableOpacity style={styles.addButton} onPress={addFavorite}>
@@ -17,12 +23,7 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
         </>
       ): (
         <>
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Haltestation suchen..."
-            value={search}
-            onChangeText={(text) => setSearch(text)} // Ruft die Filterfunktion auf
-          />
+        
           <FlatList
             data={favorites}
             keyExtractor={(item) => item.id.toString()}
