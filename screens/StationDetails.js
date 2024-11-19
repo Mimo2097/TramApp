@@ -25,22 +25,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5', // Angenehmer Hintergrund
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign: 'center',
+    color: '#007BFF', // Blaue Farbe für den Titel
   },
   subtitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 10,
-  },
-  location: {
     fontSize: 16,
-    marginBottom: 5,
-    color: '#555',
+    fontWeight: '600',
+    marginVertical: 10,
+    padding: 10,
+    backgroundColor: '#fff', // Weißer Hintergrund für jeden Eintrag
+    borderRadius: 8, // Abgerundete Kanten
+    shadowColor: '#000', // Schatten für Tiefe
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3, // Für Android-Schatten
+    color: '#333',
   },
 });

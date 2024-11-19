@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { StyleSheet, View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -9,13 +9,13 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
     <View style={styles.container}>
       <TextInput
             style={styles.searchBar}
-            placeholder="Haltestation suchen..."
+            placeholder="Favoriten suchen..."
             value={search}
             onChangeText={(text) => setSearch(text)} // Ruft die Filterfunktion auf
           />
       {favorites.length === 0? (
         <>
-        <TouchableOpacity style={styles.addButton} onPress={addFavorite}>
+        <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Search', { focusSearch: true })}>
           <FontAwesome name="plus" size={30} color="gray" />
         </TouchableOpacity>
         <Text style={styles.emptyText}>It is empty here</Text>

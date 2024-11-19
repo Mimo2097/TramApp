@@ -1,69 +1,86 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, TextInput, FlatList, Button, TouchableOpacity, Alert } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { SafeAreaView, StyleSheet, TextInput, FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { stations } from '../data';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+const SearchNoApi = ({ navigation, favorites, addFavorite, removeFavorite, route }) => {
+  const [startSearch, setStartSearch] = useState(''); // Suchfeld für Start
+  const [endSearch, setEndSearch] = useState(''); // Suchfeld für Ende
+  const [filteredResults, setFilteredResults] = useState(stations); // Gefilterte Ergebnisse
 
+  const startInputRef = useRef(null); // Ref für Start-Suche
+  const endInputRef = useRef(null); // Ref für Ziel-Suche
 
-const SearchNoApi = ({navigation, favorites, addFavorite, removeFavorite}) => {
-  const [search, setSearch] = useState(''); 
-  const [filteredStations, setFilteredStations] = useState(stations); // Gefiltert Statiounen
-  const [selectedStation, setSelectedStation] = useState(null);
+  // Automatische Fokussierung des Start-Suchfelds
+  useEffect(() => {
+    if (route.params?.focusSearch && startInputRef.current) {
+      startInputRef.current.focus();
+    }
+  }, [route.params]);
 
- 
-  const filterStations = (text) => {
-    setSearch(text); 
-    if (text) {
-      const filtered = stations.filter((station) =>
-        station.name.toLowerCase().includes(text.toLowerCase())
+  // Filterlogik für Start- und Endstation
+  useEffect(() => {
+    const results = stations.filter((station) => {
+      const isStartMatch = station.name.toLowerCase().includes(startSearch.toLowerCase());
+      const isEndMatch = station.departures.some((departure) =>
+        departure.endstation.toLowerCase().includes(endSearch.toLowerCase())
       );
-      setFilteredStations(filtered); 
-    } else {
-      setFilteredStations(stations); 
-    }
-  };
-
-  const handlePressOnStation = (station) => {
-    if (selectedStation?.name === station.name){
-        setSelectedStation(null); 
-    } else{
-        setSelectedStation(station);
-    }
-  };
+      return isStartMatch && isEndMatch;
+    });
+    setFilteredResults(results);
+  }, [startSearch, endSearch]);
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Eingabefelder */}
       <TextInput
+        ref={startInputRef}
         style={styles.searchBar}
-        placeholder="Haltestation suchen..."
-        value={search}
-        onChangeText={(text) => filterStations(text)}
+        placeholder="Startstation eingeben"
+        value={startSearch}
+        onChangeText={setStartSearch}
       />
+      <TextInput
+        ref={endInputRef}
+        style={styles.searchBar}
+        placeholder="Zielstation eingeben"
+        value={endSearch}
+        onChangeText={setEndSearch}
+      />
+
+      {/* Liste der gefilterten Ergebnisse */}
       <FlatList
-        data={filteredStations} 
-        keyExtractor={(item) => item.name} 
+        data={filteredResults}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.station}>
-            <TouchableOpacity 
-              onPress={() => navigation.navigate('StationDetails', {station: item})} 
-              style={styles.station}
+            <TouchableOpacity
+              onPress={() => navigation.navigate('StationDetails', { station: item })}
+              style={styles.stationDetails}
             >
               <Text style={styles.stationName}>{item.name}</Text>
+              <Text style={styles.departure}>
+                Endstationen: {item.departures.map((d) => d.endstation).join(', ')}
+              </Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity 
+            {/* <TouchableOpacity
               onPress={() => {
                 if (!favorites.some((fav) => fav.id === item.id)) {
-                  addFavorite(item); 
+                  addFavorite(item);
                 } else {
                   removeFavorite(item.id);
                 }
               }}
-            >
-              <FontAwesome name={favorites.some((fav) => fav.id === item.id) ? 'star' : 'star-o'}
-              size={20} color="white" />
+            > */}
+              {/* <FontAwesome
+                name={favorites.some((fav) => fav.id === item.id) ? 'star' : 'star-o'}
+                size={20}
+                color="gold"
+              />
             </TouchableOpacity> */}
           </View>
         )}
+        ListEmptyComponent={<Text style={styles.emptyText}>Keine Ergebnisse gefunden</Text>}
       />
     </SafeAreaView>
   );
@@ -75,31 +92,48 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#8fcbbc',
+    backgroundColor: '#f5f5f5',
   },
   searchBar: {
-    height: 40,
+    height: 50,
     borderColor: '#ccc',
     borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    marginBottom: 10,
+    borderRadius: 25,
+    paddingHorizontal: 15,
+    marginBottom: 20,
     backgroundColor: '#fff',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
   },
   station: {
-    marginBottom: 20,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    marginBottom: 15,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
   },
   stationName: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: '#333',
   },
   departure: {
     fontSize: 14,
     color: '#555',
+  },
+  emptyText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+    color: '#999',
   },
 });
