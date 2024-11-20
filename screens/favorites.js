@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
-  console.log('Empfangene Favoritenliste Favoriten:', favorites);
+  console.log('Empfangene Favoritenliste:', favorites);
   const [search, setSearch] = useState('');
   return (
 
@@ -17,11 +17,13 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
           />
       {favorites.length === 0? (
         <>
+        <View style={[styles.box, { width: 350, height: 175 }]}>
         <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Search', { focusSearch: true })}>
-          <FontAwesome name="plus" size={30} color="gray" />
+          <FontAwesome name="plus" size={30} color="white" />
         </TouchableOpacity>
         <Text style={styles.emptyText}>It is empty here</Text>
         <Text style={styles.subText}>Start adding your first station</Text>
+        </View>
         </>
       ): (
         <>
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#8fcbbc'
+    backgroundColor: '#007ACC'
   },
   searchBar:{
     position: 'absolute',
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     borderWidth: 2,
-    borderColor: 'gray',
+    borderColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
@@ -82,12 +84,25 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'gray',
+    color: 'white',
     marginTop: 10,
   },
   subText: {
     fontSize: 14,
-    color: 'gray',
+    color: 'white',
     marginTop: 5,
+  },
+  box: {
+    borderWidth: 2, // Breite der Umrandung
+    borderColor: 'white', // Farbe der Umrandung
+    borderRadius: 15, // Abgerundete Ecken
+    padding: 20, // Innenabstand
+    marginVertical: 10, // Abstand oben und unten
+    alignItems: 'center', // Zentriert den Text
+  },
+  boxText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333', // Dunkler Text
   },
 });
