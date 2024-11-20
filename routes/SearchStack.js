@@ -1,4 +1,5 @@
 import React from 'react';
+import {FlatList} from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import SearchNoApi from '../screens/SearchNoApi';
 import StationDetails from '../screens/StationDetails';

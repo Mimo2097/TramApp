@@ -3,39 +3,21 @@ export const stations = [
         id: 1,
         name: 'Limpertsberg, Theater',
         departures: [
-            {
-                line: '12', 
-                endstation: 'Lycee Bonnevoie', 
-                departureTime: '2024-11-13 11:45:00Z'
-            },
-            {
-                line: '12', 
-                endstation: 'Lycee Bonnevoie', 
-                departureTime: '2024-11-13 11:50:00Z'
+            {line: '12', endstation: 'Lycee Bonnevoie', departureTime: '2024-11-13 11:45:00Z'},
+            {line: '12', endstation: 'Lycee Bonnevoie', departureTime: '2024-11-13 11:50:00Z'
             }
         ],
-
-        location: {
-            longitude: 6.138045, 
-            latitude: 49.577761
-        }
+        location: {longitude: 6.138045, latitude: 49.577761}
     },
 
     {
         id: 2,
         name: 'Limpertsberg, fianc',
         departures: [
-            {
-                line: '12', endstation: 'Lycee bonnevoie', departureTime: '2024-11-13 11:45:00Z'
-            },
-            {
-                line: '12', endstation: 'Lycee bonnevoie', departureTime: '2024-11-13 11:50:00Z'
-            }
+            {line: '12', endstation: 'Lycee bonnevoie', departureTime: '2024-11-13 11:45:00Z'},
+            {line: '12', endstation: 'Lycee bonnevoie', departureTime: '2024-11-13 11:50:00Z'}
         ],
-        location: {
-            longitude: 6.138045, 
-            latitude: 49.577761
-        }
+        location: {longitude: 6.138045, latitude: 49.577761}
     },
 
     {

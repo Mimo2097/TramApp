@@ -2,23 +2,31 @@ import React, { useState, useRef, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, TextInput, FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { stations } from '../data';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const SearchNoApi = ({ navigation, favorites, addFavorite, removeFavorite, route }) => {
-  const [startSearch, setStartSearch] = useState(''); // Suchfeld für Start
-  const [endSearch, setEndSearch] = useState(''); // Suchfeld für Ende
-  const [filteredResults, setFilteredResults] = useState(stations); // Gefilterte Ergebnisse
+  console.log('Empfangene Favoritenliste Search:', favorites);
+  const [startSearch, setStartSearch] = useState('');
+  const [endSearch, setEndSearch] = useState('');
+  const [filteredResults, setFilteredResults] = useState(stations);
 
-  const startInputRef = useRef(null); // Ref für Start-Suche
-  const endInputRef = useRef(null); // Ref für Ziel-Suche
+  const startInputRef = useRef(null);
+  const endInputRef = useRef(null);
 
-  // Automatische Fokussierung des Start-Suchfelds
-  useEffect(() => {
-    if (route.params?.focusSearch && startInputRef.current) {
-      startInputRef.current.focus();
+  const toggleFavorite = (station) => {
+    const alreadyFav = favorites.find((item) => item.id === station.id);
+    if (alreadyFav) {
+      removeFavorite(station.id);
+    } else {
+      addFavorite(station);
     }
-  }, [route.params]);
+  };
 
-  // Filterlogik für Start- und Endstation
+  useEffect(() => {
+    console.log('Aktuelle Favoritenliste:', favorites);
+  }, [favorites]);
+
   useEffect(() => {
     const results = stations.filter((station) => {
       const isStartMatch = station.name.toLowerCase().includes(startSearch.toLowerCase());
@@ -78,6 +86,10 @@ const SearchNoApi = ({ navigation, favorites, addFavorite, removeFavorite, route
                 color="gold"
               />
             </TouchableOpacity> */}
+            <TouchableOpacity>
+              <Icon name="star" size={24} color="gold" style={styles.icon} onPress={() => toggleFavorite(item)}/>
+            </TouchableOpacity>
+            
           </View>
         )}
         ListEmptyComponent={<Text style={styles.emptyText}>Keine Ergebnisse gefunden</Text>}
@@ -135,5 +147,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 16,
     color: '#999',
+  },
+  icon: {
+    marginLeft: 'auto',
   },
 });

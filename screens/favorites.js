@@ -1,12 +1,14 @@
 import React, {useState, useRef, useEffect} from 'react';
-import { StyleSheet, View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
+  console.log('Empfangene Favoritenliste Favoriten:', favorites);
   const [search, setSearch] = useState('');
   return (
 
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TextInput
             style={styles.searchBar}
             placeholder="Favoriten suchen..."
@@ -38,7 +40,7 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
           />
           </>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

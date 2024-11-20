@@ -67,12 +67,12 @@ const Tabs = ({ favorites, addFavorite, removeFavorite }) => {
                 ),
             }}
             >
-                {({navigation}) => (
-            <Map 
-            favorites={favorites}
-            addFavorite={addFavorite}
-            removeFavorite={removeFavorite}
-            navigation={navigation}
+            {({navigation}) => (
+            <Map //Screen Favorites kritt Props favorites, addFav, removeFav als children-Prop iwwerginn 
+                favorites={favorites}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
+                navigation={navigation}
             />
             )}
             </Tab.Screen>
@@ -91,13 +91,13 @@ const Tabs = ({ favorites, addFavorite, removeFavorite }) => {
             }}
             >
             {({navigation}) => (//manuelle Übergabe des Props navigation da dies für children nicht automatisch erfolgt
-            <SearchStack 
-                favorites={favorites}
-                addFavorite={addFavorite}
-                removeFavorite={removeFavorite}
-                navigation={navigation}
-            />
-            )}
+                <SearchNoApi //Screen Favorites kritt Props favorites, addFav, removeFav als children-Prop iwwerginn 
+                    favorites={favorites}
+                    addFavorite={addFavorite}
+                    removeFavorite={removeFavorite}
+                    navigation={navigation}
+                />
+                )}
             </Tab.Screen>
   
             <Tab.Screen  name="Settings" component={Settings} options={{
