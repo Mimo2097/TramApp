@@ -12,6 +12,41 @@ const Map = ({ navigation }) => {
   const filteredStations = stations.filter((station) =>
     station.name.toLowerCase().includes(search.toLowerCase())
   );
+    
+  const routeOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+  const routeCoordinates = routeOrder.map((id) => {
+    const station = stations.find((s) => s.id === id);
+    return {
+      latitude: station.location.latitude,
+      longitude: station.location.longitude,
+    };
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date()); // Aktualisiere die aktuelle Zeit jede Minute
+    }, 60000); 
+
+    return () => clearInterval(interval); // Speicherlecks vermeiden
+  }, []);
+
+  const getNextDepartures = (departures) => {
+    console.log('Aktuelle Zeit:', currentTime.toISOString());
+    departures.forEach(departure => {
+      console.log('Abfahrtszeit:', departure.departureTime, 'Differenz:', new Date(departure.departureTime) - currentTime);
+    });
+
+    const futureDepartures = departures
+      .map((departure) => ({
+        ...departure,
+        timeDiff: new Date(departure.departureTime) - currentTime,
+      }))
+      .filter((departure) => departure.timeDiff > 0) // Nur zukünftige Abfahrten
+      .sort((a, b) => a.timeDiff - b.timeDiff); // Nach Zeit sortieren
+
+    return futureDepartures.slice(0, 1); // Zeige die nächste Abfahrt
+  };
 
   return (
     <View style={styles.container}>
@@ -31,10 +66,18 @@ const Map = ({ navigation }) => {
             longitude: station.location.longitude,
           }}
           title={station.name}
+              description={
+                nextDeparture.length > 0
+                  ? `Nächste Abfahrt: Linie ${nextDeparture[0].line} um ${new Date(
+                      nextDeparture[0].departureTime
+                    ).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`
+                  : 'Keine weiteren Abfahrten'
+              }
+              
         >
           <View>
-            <Icon name="tram" size={30} color="blue" />
-          </View>
+                <Icon name="place" size={30} color="blue" />
+              </View>
 
         </Marker>
         ))}
