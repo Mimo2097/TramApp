@@ -1,83 +1,101 @@
 export const stations = [
     {
         id: 1,
-        name: 'Limpertsberg, Theater',
+        name: 'Kirchberg, Luxexpo',
         departures: [
-            {line: '12', endstation: 'Lycee Bonnevoie', departureTime: '2024-11-13 11:45:00Z'},
-            {line: '12', endstation: 'Lycee Bonnevoie', departureTime: '2024-11-13 11:50:00Z'
-            }
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T21:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T21:20:00Z' },
         ],
-        location: {longitude: 6.138045, latitude: 49.577761}
+        location: { longitude: 6.1745, latitude: 49.6352 },
     },
-
     {
         id: 2,
-        name: 'Limpertsberg, fianc',
+        name: 'Kirchberg, Alphonse Weicker',
         departures: [
-            {line: '12', endstation: 'Lycee bonnevoie', departureTime: '2024-11-13 11:45:00Z'},
-            {line: '12', endstation: 'Lycee bonnevoie', departureTime: '2024-11-13 11:50:00Z'}
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:35:00Z' },
         ],
-        location: {longitude: 6.138045, latitude: 49.577761}
+        location: { longitude: 6.1723, latitude: 49.6331 },
     },
-
     {
         id: 3,
-        name: 'Gare centrale',
+        name: 'Kirchberg, Nationalbibliothéik / Bibliothèque Nationale',
         departures: [
-            { line: '16', endstation: 'Hollerich', departureTime: '2024-11-13 12:10:00Z' },
-            { line: '16', endstation: 'Hollerich', departureTime: '2024-11-13 12:20:00Z' }
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:35:00Z' },
         ],
-        location: { longitude: 6.131935, latitude: 49.601718 }
+        location: { longitude: 6.1704, latitude: 49.6318 },
     },
     {
         id: 4,
-        name: 'kirchberg, boulevard k-d',
+        name: 'Kirchberg, Universiteit',
         departures: [
-            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-13 11:55:00Z' },
-            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-13 12:05:00Z' }
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:15:00Z' },
         ],
-        location: { 
-            longitude: 6.168895,
-             latitude: 49.627843 }
+        location: { longitude: 6.1691, latitude: 49.6301 },
     },
     {
         id: 5,
-        name: 'Strassen, Roullinger',
+        name: 'Kirchberg, Coque',
         departures: [
-            { line: '5', endstation: 'Bereldange', departureTime: '2024-11-13 12:15:00Z' },
-            { line: '5', endstation: 'Bereldange', departureTime: '2024-11-13 12:25:00Z' }
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:21:00Z' },
         ],
-        location: { 
-            longitude: 6.083003, 
-            latitude: 49.624792 }
+        location: { longitude: 6.1678, latitude: 49.6285 },
     },
     {
         id: 6,
-        name: 'luxexpo',
+        name: 'Kirchberg, Europaparlament / Parlement Européen',
         departures: [
-            { line: '10', endstation: 'City concorde', departureTime: '2024-11-13 12:00:00Z' },
-            { line: '10', endstation: 'City concorde', departureTime: '2024-11-13 12:15:00Z' }
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:23:00Z' },
         ],
-        location: { longitude: 6.173573, latitude: 49.634324 }
+        location: { longitude: 6.1657, latitude: 49.6271 },
     },
     {
         id: 7,
-        name: 'Howald, rue des muguets',
+        name: 'Kirchberg, Philharmonie - Mudam',
         departures: [
-            { line: '21', endstation: 'Cents', departureTime: '2024-11-13 12:25:00Z' },
-            { line: '21', endstation: 'Cents', departureTime: '2024-11-13 12:40:00Z' }
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:25:00Z' },
         ],
-        location: { 
-            longitude: 6.140251, 
-            latitude: 49.582392 }
+        location: { longitude: 6.1638, latitude: 49.6257 },
     },
     {
         id: 8,
-        name: 'Limpertsberg, glacis',
+        name: 'Kirchberg, Rout Bréck - Pafendall',
         departures: [
-            { line: '8', endstation: 'Cloche d or', departureTime: '2024-11-13 11:50:00Z' },
-            { line: '8', endstation: 'Cloche d or', departureTime: '2024-11-13 12:00:00Z' }
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:28:00Z' },
         ],
-        location: { longitude: 6.129745, latitude: 49.616478 }
+        location: { longitude: 6.1619, latitude: 49.6241 },
+    },
+    {
+        id: 9,
+        name: 'Limpertsberg, Theater',
+        departures: [
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:30:00Z' },
+        ],
+        location: { longitude: 6.1385, latitude: 49.6171 },
+    },
+    {
+        id: 10,
+        name: 'Luxembourg, Gare Centrale',
+        departures: [
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:35:00Z' },
+        ],
+        location: { longitude: 6.1325, latitude: 49.6005 },
+    },
+    {
+        id: 11,
+        name: 'Gasperich, Lycée Vauban',
+        departures: [
+            { line: '1', endstation: 'Bonnevoie', departureTime: '2024-11-24T19:10:00Z' },
+            { line: '1', endstation: 'Hamilius', departureTime: '2024-11-24T19:40:00Z' },
+        ],
+        location: { longitude: 6.1205, latitude: 49.5881 },
     }
-]
+];

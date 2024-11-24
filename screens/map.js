@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, TextInput, FlatList,TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import {stations} from '../data';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps';
+import { stations } from '../data';
 
 const Map = ({ navigation }) => {
   const [search, setSearch] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [isListVisible, setListVisible] = useState(false);
   
   const filteredStations = stations.filter((station) =>
     station.name.toLowerCase().includes(search.toLowerCase())
@@ -57,15 +57,17 @@ const Map = ({ navigation }) => {
         latitudeDelta: 0.05,
         longitudeDelta: 0.05,
         }}
-        >
-          {filteredStations.map((station) => (
-          <Marker
-          key={station.id}
-          coordinate={{
-            latitude: station.location.latitude,
-            longitude: station.location.longitude,
-          }}
-          title={station.name}
+      >
+        {filteredStations.map((station) => {
+          const nextDeparture = getNextDepartures(station.departures);
+          return (
+            <Marker
+              key={station.id}
+              coordinate={{
+                latitude: station.location.latitude,
+                longitude: station.location.longitude,
+              }}
+              title={station.name}
               description={
                 nextDeparture.length > 0
                   ? `Nächste Abfahrt: Linie ${nextDeparture[0].line} um ${new Date(
@@ -74,13 +76,19 @@ const Map = ({ navigation }) => {
                   : 'Keine weiteren Abfahrten'
               }
               
-        >
-          <View>
+            >
+              <View>
                 <Icon name="place" size={30} color="blue" />
               </View>
-
-        </Marker>
-        ))}
+            </Marker>
+          );
+        })}
+        
+        <Polyline
+          coordinates={routeCoordinates}
+          strokeColor="#007BFF" // Linienfarbe
+          strokeWidth={4} // Linienbreite
+        />
       </MapView>
       
       <TextInput
@@ -92,7 +100,6 @@ const Map = ({ navigation }) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
