@@ -54,12 +54,22 @@ const App = () => {
   };
   console.log('Initiale Favoriten', favorites);
 
+  const toggleFavorite = (station) => {
+    const alreadyFav = favorites.find((item) => item.id === station.id);
+    if (alreadyFav) {
+      removeFavorite(station.id);
+    } else {
+      addFavorite(station);
+    }
+  };
+
   return(
     <NavigationContainer>
       <Tabs
         favorites={favorites}
         addFavorite={addFavorite}
         removeFavorite={removeFavorite}
+        toggleFavorite={toggleFavorite}
       />
     </NavigationContainer>
   );

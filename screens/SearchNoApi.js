@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const SearchNoApi = ({ navigation, favorites, addFavorite, removeFavorite, route }) => {
+const SearchNoApi = ({ navigation, favorites, toggleFavorite, addFavorite, removeFavorite, route }) => {
   console.log('Empfangene Favoritenliste Search:', favorites);
   const [startSearch, setStartSearch] = useState('');
   const [endSearch, setEndSearch] = useState('');
@@ -13,15 +13,6 @@ const SearchNoApi = ({ navigation, favorites, addFavorite, removeFavorite, route
 
   const startInputRef = useRef(null);
   const endInputRef = useRef(null);
-
-  const toggleFavorite = (station) => {
-    const alreadyFav = favorites.find((item) => item.id === station.id);
-    if (alreadyFav) {
-      removeFavorite(station.id);
-    } else {
-      addFavorite(station);
-    }
-  };
 
   useEffect(() => {
     console.log('Aktuelle Favoritenliste:', favorites);
@@ -87,7 +78,12 @@ const SearchNoApi = ({ navigation, favorites, addFavorite, removeFavorite, route
               />
             </TouchableOpacity> */}
             <TouchableOpacity>
-              <Icon name="star" size={24} color="gold" style={styles.icon} onPress={() => toggleFavorite(item)}/>
+              <FontAwesome
+              name={favorites.some((fav) => fav.id === item.id) ? 'star' : 'star-o'} // Icon wechselt
+              size={24}
+              color={favorites.some((fav) => fav.id === item.id) ? 'gold' : 'gray'} // Farbe wechselt
+              onPress={() => toggleFavorite(item)}
+            />
             </TouchableOpacity>
             
           </View>

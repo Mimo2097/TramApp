@@ -6,15 +6,18 @@ const StationDetails = ({ route }) => { // route enthält die übergebenen Param
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{station.name}</Text>
-            <View>
-                {station.departures.map((departure, index) => ( //Iteration durch jedes Element
-                    <Text key={index} style={styles.subtitle}>
-                    Linie {departure.line} Richtung {departure.endstation} um{' '}
-                    {new Date(departure.departureTime).toLocaleTimeString()}
-                    </Text>
-                ))}
-                </View>
+            <Text style={styles.stationName}>{item.name}</Text>
+                <Text style={styles.departure}>
+                  Linie: {item.departures[0].line} Endstationen: {item.departures[0].endstation}
+                </Text>
+                <Text style={styles.departure}>
+                  Abfahrten:
+                </Text>
+                {item.departures.map((departure, index) => (
+                  <Text key={index} style={styles.departure}>
+                    {departure.departureTime}
+                  </Text>
+                ))}      
         </View>
     );
 };

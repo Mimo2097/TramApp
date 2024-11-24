@@ -6,8 +6,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
   console.log('Empfangene Favoritenliste:', favorites);
   const [search, setSearch] = useState('');
+  
   return (
-
     <SafeAreaView style={styles.container}>
       <TextInput
             style={styles.searchBar}
@@ -19,7 +19,7 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
         <>
         <View style={[styles.box, { width: 350, height: 175 }]}>
         <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Search', { focusSearch: true })}>
-          <FontAwesome name="plus" size={30} color="white" />
+          <FontAwesome name="plus" size={30} color="black" />
         </TouchableOpacity>
         <Text style={styles.emptyText}>It is empty here</Text>
         <Text style={styles.subText}>Start adding your first station</Text>
@@ -27,19 +27,43 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
         </>
       ): (
         <>
-        
           <FlatList
             data={favorites}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <View >
-                <Text >{item.name}</Text>
-                <Text >
-                  Latitude: {item.location.latitude}, Longitude: {item.location.longitude}
-                </Text>
-              </View>
-            )}
-          />
+              <View style={styles.box}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                  <View>
+                    <Text style={styles.stationName}>{item.name}</Text>
+                    <Text style={styles.departure}>
+                      Linie: {item.departures[0].line} Endstation: {item.departures[0].endstation}
+                    </Text>
+                    <Text style={styles.departure}>Abfahrten:</Text>
+                    {item.departures.map((departure, index) => (
+                      <Text key={index} style={styles.departure}>
+                        {departure.departureTime}
+                      </Text>
+                    ))}
+                  </View>
+                  {/* Favoriten-Icon */}
+                  <TouchableOpacity onPress={() => {
+                    const alreadyFav = favorites.some((fav) => fav.id === item.id);
+                    if (alreadyFav) {
+                      removeFavorite(item.id);
+                    } else {
+                      addFavorite(item);
+                    }
+                  }}>
+                    <FontAwesome
+                      name={favorites.some((fav) => fav.id === item.id) ? 'star' : 'star-o'} // Icon wechselt
+                      size={24}
+                      color={favorites.some((fav) => fav.id === item.id) ? 'gold' : 'gray'} // Farbe wechselt
+                    />
+        </TouchableOpacity>
+      </View>
+    </View>
+  )}
+/>
           </>
       )}
     </SafeAreaView>
@@ -76,7 +100,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
@@ -84,12 +108,12 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
     marginTop: 10,
   },
   subText: {
     fontSize: 14,
-    color: 'white',
+    color: 'black',
     marginTop: 5,
   },
   box: {
@@ -99,10 +123,20 @@ const styles = StyleSheet.create({
     padding: 20, // Innenabstand
     marginVertical: 10, // Abstand oben und unten
     alignItems: 'center', // Zentriert den Text
+    backgroundColor: 'white',
   },
   boxText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333', // Dunkler Text
+    color: 'black',
+  },
+  stationName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  departure: {
+    fontSize: 14,
+    color: 'black',
   },
 });
