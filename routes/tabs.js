@@ -13,7 +13,7 @@ import SearchStack from './SearchStack';
 
 
 const Tab = createBottomTabNavigator();
-const Tabs = ({ favorites, addFavorite, removeFavorite }) => {
+const Tabs = ({ favorites, addFavorite, removeFavorite, toggleFavorite }) => {
     return (
         <Tab.Navigator
         screenOptions={{
@@ -47,6 +47,7 @@ const Tabs = ({ favorites, addFavorite, removeFavorite }) => {
                 addFavorite={addFavorite}
                 removeFavorite={removeFavorite}
                 navigation={navigation}
+                toggleFavorite={toggleFavorite}
             />
             )}
             </Tab.Screen>
@@ -70,6 +71,7 @@ const Tabs = ({ favorites, addFavorite, removeFavorite }) => {
                 addFavorite={addFavorite}
                 removeFavorite={removeFavorite}
                 navigation={navigation}
+                toggleFavorite={toggleFavorite}
             />
             )}
             </Tab.Screen>
@@ -93,6 +95,7 @@ const Tabs = ({ favorites, addFavorite, removeFavorite }) => {
                         addFavorite={addFavorite}
                         removeFavorite={removeFavorite}
                         navigation={navigation}
+                        toggleFavorite={toggleFavorite}
                     />
                     )}
                 </Tab.Screen>
