@@ -211,4 +211,18 @@ const styles = StyleSheet.create({
     bottom: 100, // Abstand vom unteren Rand
     right: 140, // Abstand vom rechten Rand
   },
+  emptyText: {
+    fontSize: 20, // Größerer Text für Sichtbarkeit
+    fontWeight: 'bold', // Fettgedruckt für Betonung
+    color: '#333', // Dunkle Farbe für guten Kontrast
+    textAlign: 'center', // Zentrierter Text
+    marginTop: 20, // Abstand nach oben
+  },
+  subText: {
+    fontSize: 16, // Etwas kleiner für unterstützenden Text
+    color: '#555', // Neutralere Farbe für weniger Betonung
+    textAlign: 'center', // Zentrierter Text
+    marginTop: 10, // Kleiner Abstand zum oberen Text
+    paddingHorizontal: 15, // Platz für längere Texte
+  },
 });
