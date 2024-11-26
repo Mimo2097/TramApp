@@ -5,24 +5,25 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
   console.log('Empfangene Favoritenliste:', favorites);
-  const [search, setSearch] = useState('');//
+  const [search, setSearch] = useState('');//Suchfunktioun
   const [filteredFavorites, setFilteredFavorites] = useState(favorites);//d'Favoriten je nodems filteren
   const [isFocused, setIsFocused] = useState(false); //ass d'Suchleist focuseiert?
 
-  const filterFavorites = (text) => {
-    setSearch(text);
+  const filterFavorites = (text) => {//text ass d'Variabel
+    setSearch(text);//setter-Funktioun
     const filtered = favorites.filter((item) =>
-      item.name.toLowerCase().includes(text.toLowerCase())
+      item.name.toLowerCase().includes(text.toLowerCase())//Grouss- a Klengschreiwung
     );
-    setFilteredFavorites(filtered);
+    setFilteredFavorites(filtered);//setter-Funktioun
   };
 
+  {/*Filterfunktion gett obgeruf wann sech favorites oder search ännert */}
   useEffect(() => {
     const filtered = favorites.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase())
     );
     setFilteredFavorites(filtered); // Gefilterte Liste aktualisieren
-  }, [favorites, search]);
+  }, [favorites, search]);//Array defineiert weini useEffect ausgeleist gett: [dependencies]
   
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +44,7 @@ const Favorites= ({navigation, favorites, addFavorite, removeFavorite}) => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => {
-                  setIsFocused(false); // Verstecke Liste nach Auswahl
+                  setIsFocused(false); // Nemmen sichtbar falls een an der Suchleiste ass
                   setSearch(item.name); // Setze den Namen der Station in die Suchleiste
                 }}
               >
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   container: { 
     flex: 1,
     paddingHorizontal: 15,
-    backgroundColor: '#007ACC', // Blaues Hintergrund
+    backgroundColor: '#007ACC', // Blauer Hintergrund
   },
   searchBar: {
     height: 50,
