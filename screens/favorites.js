@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   container: { 
     flex: 1,
     paddingHorizontal: 15,
-    backgroundColor: '#007ACC', // Blauer Hintergrund
+    backgroundColor: '#339ED9', // Blauer Hintergrund
   },
   searchBar: {
     height: 50,
