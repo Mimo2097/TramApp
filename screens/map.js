@@ -34,6 +34,10 @@ const Map = ({ navigation }) => {
     };
   });
 
+  useEffect(() => {
+    console.log("Index", currentIndex)
+  }, [currentIndex]);
+
   {/*Aktualiseiert all sekonn dei intern Zait*/}
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,30 +84,30 @@ const Map = ({ navigation }) => {
       return time.toISOString(); // ISO-Format für die Zeit
     });
     setArrivalTimes(times); // Zeiten speichern
-    console.log("Arrival Times: ", times);
+    // console.log("Arrival Times: ", times);
   }, []);
   
   useEffect(() => {
     const matchingIndex = ArrivalTimes.findIndex((time) => {
       const timeAsDate = new Date(time); 
       const diff = Math.abs(currentTime - timeAsDate); 
-      console.log("currentTime", currentTime);
-      console.log("timeAsDate", timeAsDate);
-      console.log("Zeitdifferenz: ", diff);
+      // console.log("currentTime", currentTime);
+      // console.log("timeAsDate", timeAsDate);
+      // console.log("Zeitdifferenz: ", diff);
       return diff <= 1000; // Toleranz von 1 Sekunde
     });
     if (matchingIndex !== -1 && matchingIndex !== currentIndex) { //get ausgeleist wann eng Iwwerstemmung vun der Zait fonnt ginn ass +   
       setCurrentIndex(matchingIndex); //neien Index gett aktualiseiert
-      console.log("Übereinstimmung gefunden! Index:", matchingIndex);
+      // console.log("Übereinstimmung gefunden! Index:", matchingIndex);
       // Animatioun starten
       Animated.timing(tramPosition, {
-        toValue: (matchingIndex / (stations.length - 1)) * 100, // Zielposition in %
+        toValue: ((matchingIndex + 0.65) / ((stations.length ))) * 98, // Zielposition in %
         duration: 1000, // Bewegung in 1 Sekunde
         useNativeDriver: false,
       }).start();
     }
     else {
-      console.log("Keine Übereinstimmung gefunden.");
+      // console.log("Keine Übereinstimmung gefunden.");
     }
   }, [currentTime, ArrivalTimes, currentIndex, tramPosition]);
 
@@ -179,10 +183,10 @@ const Map = ({ navigation }) => {
               key={station.id}
               style={[
                 styles.node,
-                {          left: `${(index / (stations.length - 1)) * 100}%`, // Knotenposition
+                {left: `${((index + 0.65) / (stations.length )) * 100 }%`,
                 transform: [{ translateX: -7.5 }],},
               ]}
-              onPress={() => handleNodePress(station.id)} // Handle Node Press
+              onPress={() => handleNodePress(station.id)}
             />
         ))}
         
@@ -197,30 +201,17 @@ const Map = ({ navigation }) => {
               },
             ]}
           >
-            <Icon name="tram" size={30} color="blue" />
-      </Animated.View>
-
+            <Icon name="tram" size={40} color="blue" />
+            <Text style={styles.infoText}>{stations[currentIndex]?.name || 'Station'}</Text>
+        </Animated.View>
       </View>
       {/* Informationen der ausgewählten Station */}
         {selectedStation && (
           <View style={styles.infoContainer}>
             <Text style={styles.infoText}>{selectedStation.name}</Text>
-            {/* <Text style={styles.infoText}>Abfahrt: {selectedStation.nextDeparture}</Text> */}
           </View>
         )}
       </View>
-
-      {/* {isAtStation ? (
-        console.log("Die Tram ist an der Station"),
-        <View style={styles.icon2}>
-          <Icon name="tram" size={30} color="blue" />
-        </View>
-      ):(
-        console.log("Die Tram ist nocht nicht da"),
-        <View style={styles.icon2}>
-          <Icon name="place" size={30} color="blue" />
-        </View>
-      )}  */}
   </View>
   );  
 };
@@ -276,8 +267,8 @@ const styles = StyleSheet.create({
 
   line: {
     position: 'relative',
-    width: '90%',
-    height: 12,
+    width: '95%',
+    height: 24,
     backgroundColor: '#007ACC',
     borderRadius: 8,
     shadowColor: '#000',
@@ -286,28 +277,20 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 3, 
   },
-  
-  linie: {
-    position: 'absolute',
-    bottom: 1, 
-    backgroundColor: 'black',
-    width: '95%',
-    height: 5,
-    borderRadius: 8,
-  },
 
   node: {
     position: 'absolute',
     borderColor:'#007ACC',
     borderWidth: 2,
-    width: 15,
-    height: 15,
-    borderRadius: 7.5,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
     backgroundColor: 'white',
-    top: -2,
+    top: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   nodeLabel: {
     position: 'absolute',
     top: 70, 
@@ -315,6 +298,7 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlign: 'center',
   },
+
   infoContainer: {
     position: 'absolute',
     bottom: 40, // Beschriftung 30px über der Linie
@@ -324,22 +308,31 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
   },
+
   infoText: {
-    fontSize: 14,
+    position: 'absolute',
+    bottom: 45, // Abstand über dem Icon
+    fontSize: 20,
     color: '#333',
     textAlign: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    // paddingHorizontal: 20, // Nur horizontal Polsterung
+    paddingVertical: 2,
+    borderRadius: 20,
+    width: 200,
+    lineHeight: 20,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
-  icon: {
-    position: 'absolute', // Absolut positioniert
-    bottom: -10, // 1 Pixel vom unteren Rand des Containers entfernt
-    left: '50%', // Zentrierung horizontal
-    transform: [{ translateX: -15 }], // Anpassung, da das Icon 30px groß ist
-  },
+
   tramIcon:{
     position: 'absolute',
-    bottom: 10,
+    bottom: 20,
     transform: [{ translateX: -15 }],
-  }
+  },
 });
 
 export default Map;
